@@ -23,7 +23,7 @@ exports.createPolicy = async (req, res) => {
 
 exports.searchPolicyByUser = async (req, res) => {
   try {
-    const policies = await Policy.find({ user: req.params.userId }).populate('policyCategory company');
+    const policies = await Policy.find({ userId: req.params.userId })
     return apiResponse.successResponseWithData(res, "policy found successfully", policies)
   } catch (err) {
     return apiResponse.somethingResponse(res, "server error", err)

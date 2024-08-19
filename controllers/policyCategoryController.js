@@ -4,7 +4,6 @@ const apiResponse = require('../helper/apiResponse')
 exports.getAllPolicyCategories = async (req, res) => {
   try {
     const categories = await PolicyCategory.find();
-    // res.json(categories);
     return apiResponse.successResponseWithData(res, "categories listed successfully", categories)
   } catch (err) {
     return apiResponse.somethingResponse(res, "Server Error'", err)

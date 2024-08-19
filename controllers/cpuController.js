@@ -14,6 +14,6 @@ exports.trackCpuUsage = async (req, res) => {
       return apiResponse.successResponseWithData(res, "Server restarted due to high CPU usage", cpuUsage)
     });
   } else {
-    return apiResponse.somethingResponse(res, "CPU usage is normal", cpuUsage)
+    return apiResponse.successResponseWithData(res, "CPU usage is normal", cpuUsage)
   }
 };

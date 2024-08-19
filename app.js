@@ -8,7 +8,7 @@ const policyCategoryRoutes = require('./routes/policyCategoryRoutes');
 const policyCarrierRoutes = require('./routes/policyCarrierRoutes');
 const cpuRoutes = require('./routes/cpuRoutes');
 const fileUpload = require('express-fileupload');
-const schedulerRoutes = require('./services/scheduler');
+const schedulerRoutes = require('./routes/schedulerRoutes');
 const dataUploadRoutes = require('./routes/dataUploadRoutes')
 
 const app = express();
