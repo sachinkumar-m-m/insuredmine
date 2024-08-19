@@ -1,4 +1,3 @@
-# Project Title
 
 ## Overview
 This project is a Node.js application with the following features:
