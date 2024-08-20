@@ -22,12 +22,12 @@ async function processFile() {
         try {
           const [agentName, userType, policyMode, producer, policyNumber, premiumAmountWritten, premiumAmount, policyType, companyName, categoryName, policyStartDate, policyEndDate, csr, accountName, email, gender, firstname, city, accountType, phone, address, state, zip, dob, primary, applicantId, agencyId, hasActiveClientPolicy] = row.values;
 
-          await db.collection('agents').updateOne(
+          const agentResult =await db.collection('agents').updateOne(
             { name: agentName },
             { $set: { name: agentName } },
             { upsert: true }
           );
-
+          const agentId = agentResult.upsertedId || (await db.collection('agents').findOne({ name }))._id;
           const userResult = await db.collection('users').updateOne(
             { email },
             { $set: { firstName: firstname, dob, address, phone, state, zip, email, gender, userType } },
@@ -66,7 +66,17 @@ async function processFile() {
                 policyEndDate,
                 policyCategoryId,
                 policyCarrierId,
-                userId
+                userId,
+                policyType: policyType,
+                premiumAmount: premiumAmount,
+                applicantId: applicantId,
+                agencyId: agentId,
+                hasActiveClientPolicy: hasActiveClientPolicy,
+                accountType:accountType,
+                policyMode:policyMode,
+                accountId:accountId,
+                csr:csr
+
               }
             },
             { upsert: true }
@@ -105,33 +115,12 @@ async function processCsvFile(db) {
         const promise = (async () => {
           try {
             const {
-              agent,
-              userType,
-              policy_mode,
-              policy_number,
-              premium_amount,
-              policy_type,
-              company_name,
-              category_name,
-              policy_start_date,
-              policy_end_date,
-              csr,
-              account_name,
-              email,
-              gender,
-              firstname,
-              city,
-              account_type,
-              phone,
-              address,
-              state,
-              zip,
-              dob,
-              Applicant_ID,
-              agency_id,
-              hasActive_ClientPolicy
+              agent, userType, policy_mode, policy_number, premium_amount,
+              policy_type, company_name, category_name, policy_start_date,
+              policy_end_date, csr, account_name, email, gender, firstname,
+              city, account_type, phone, address, state, zip, dob,
+              Applicant_ID, agency_id, hasActive_ClientPolicy
             } = row;
-
 
            const agentResult = await db.collection('agents').updateOne(
               { name: agent },
