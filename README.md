@@ -12,3 +12,5 @@ This project is a Node.js application with the following features:
    ```sh
    git clone <repository-url>
    cd project-root
+
+# insuredmine
