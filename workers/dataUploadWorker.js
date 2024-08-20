@@ -76,7 +76,6 @@ async function processFile() {
                 policyMode:policyMode,
                 accountId:accountId,
                 csr:csr
-
               }
             },
             { upsert: true }
